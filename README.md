@@ -46,3 +46,8 @@ This will initialize the terraform configuration file and install the required p
 ## GCP Provider
 
 https://registry.terraform.io/providers/hashicorp/google/latest/docs
+
+## Terraform Lanaguage
+Terraform native configuration lanaguage and syntax.
+
+https://www.terraform.io/docs/language/index.html
