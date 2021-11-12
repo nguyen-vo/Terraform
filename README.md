@@ -18,6 +18,14 @@ You can use homebrew or download the latest version from [https://www.terraform.
     brew tap hashicorp/tap
     brew install hashicorp/tap/terraform
 
+### Install Terraform VSCode exntensions
+ - Name: Terraform 
+
+    VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=4ops.terraform
+- Name: HashiCorp Terraform
+
+    VS Marketplace Link: https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform
+
 ### Verify Terraform version:  
 
         terraform -v
