@@ -46,7 +46,7 @@ This will initialize the terraform configuration file and install the required p
 
 ### Apply Terraform
 
-    terraform apply
+    terraform apply -var-file=gcp_vars.json -auto-approve
 
 
 # Documentations
