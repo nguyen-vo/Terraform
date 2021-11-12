@@ -5,7 +5,7 @@ This configuration file will create the following gcp resources
  - GCP PubSub Topic and Subscription
  - GCP Firestore and a Firestore Document
  - Change the project name and project id to your own
- - you change the postfix number to different number as it will be used to create different project
+ - You can change the postfix number to different number as it will be used to create different project
  - List of used project ids: terraform-test-nv-1a, terraform-test-nv-1, terraform-test-nv-12, terraform-test-nv-123
 
  ## Getting Stated
