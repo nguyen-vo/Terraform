@@ -42,11 +42,12 @@ This will initialize the terraform configuration file and install the required p
 
 ### Plan Terraform
 
-    terraform plan
+    terraform plan -var-file=gcp_vars.json
 
 ### Apply Terraform
 
-    terraform apply -var-file=gcp_vars.json -auto-approve
+    terraform apply -var-file=gcp_vars.json
+ -auto-approve 
 
 
 # Documentations
