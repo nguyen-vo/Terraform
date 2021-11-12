@@ -39,3 +39,10 @@ This will initialize the terraform configuration file and install the required p
 ### Apply Terraform
 
     terraform apply
+
+
+# Documentations
+
+## GCP Provider
+
+https://registry.terraform.io/providers/hashicorp/google/latest/docs
