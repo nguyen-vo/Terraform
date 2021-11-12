@@ -45,6 +45,11 @@ provider "google" {
   zone    = var.gcp_project.zone
 }
 
+#resrouce block
+#resource "provider_resouceName" "local-name" {
+# local name is for Terraform to reference the resource current state and new configurations for creating and updating
+#  <Argument> = <Value>
+#}
 resource "google_project" "test_project" {
   name       = var.gcp_project.projectName
   project_id = var.gcp_project.projectID
@@ -52,7 +57,7 @@ resource "google_project" "test_project" {
 
 # enable pubsub service
 resource "google_project_service" "services" {
-  project  = google_project.test_project.project_id #imolicitly make this resource depends on the creation of google_project
+  project  = google_project.test_project.project_id #implicitly make this resource depends on the creation of google_project
   for_each = toset(["pubsub.googleapis.com", "firestore.googleapis.com"])
   service  = each.key
 
