@@ -31,6 +31,7 @@ You can use homebrew or download the latest version from [https://www.terraform.
         terraform -v
 
 ### Login to GCP and set application default credentials
+    Make sure the credentials has the onwer permissions to create project
 
     gcloud auth application-default login
 
