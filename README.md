@@ -31,7 +31,7 @@ You can use homebrew or download the latest version from [https://www.terraform.
         terraform -v
 
 ### Login to GCP and set application default credentials
-    Make sure the credentials has the onwer permissions to create project
+Make sure the credentials has the onwer permissions to create project
 
     gcloud auth application-default login
 
@@ -46,9 +46,9 @@ This will initialize the terraform configuration file and install the required p
     terraform plan -var-file=gcp_vars.json
 
 ### Apply Terraform
+Execute the plan and apply the changes to the GCP resources
 
-    terraform apply -var-file=gcp_vars.json
- -auto-approve 
+    terraform apply -var-file=gcp_vars.json -auto-approve 
 
 
 # Documentations
