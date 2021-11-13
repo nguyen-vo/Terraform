@@ -28,7 +28,7 @@ You can use homebrew or download the latest version from [https://www.terraform.
 
 ### Verify Terraform version:  
 
-        terraform -v
+    terraform -v
 
 ### Login to GCP and set application default credentials
 Make sure the credentials has the onwer permissions to create project
@@ -43,12 +43,12 @@ This will initialize the terraform configuration file and install the required p
 
 ### Plan Terraform
 
-    terraform plan -var-file=gcp_vars.json
+    terraform plan 
 
 ### Apply Terraform
 Execute the plan and apply the changes to the GCP resources
 
-    terraform apply -var-file=gcp_vars.json -auto-approve 
+    terraform apply -auto-approve 
 
 
 # Documentations
@@ -61,3 +61,8 @@ https://registry.terraform.io/providers/hashicorp/google/latest/docs
 Terraform native configuration lanaguage and syntax.
 
 https://www.terraform.io/docs/language/index.html
+
+## Tutorial
+
+
+ https://www.youtube.com/playlist?list=PL8HowI-L-3_9bkocmR3JahQ4Y-Pbqs2Nt

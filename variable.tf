@@ -1,4 +1,5 @@
-# This file define the variables
+# This file defines the variables
+
 #create input variable
 variable "gcp_project" {
   type = object({

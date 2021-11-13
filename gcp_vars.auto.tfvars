@@ -1,3 +1,6 @@
+# This file set the value for the defined variables in variables.tf
+# This will be automatically parsed by Terraform
+
 gcp_project = {
   projectID   = "terraform-test-nv-12a"
   projectName = "terraform-test-1a"
@@ -8,6 +11,7 @@ firestore = {
   collection = "terraform-config"
   docID      = "local"
   fields = {
+    //JSON string format
     fieldname = {
       mapValue = {
         fields = {
