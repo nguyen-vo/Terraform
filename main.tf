@@ -1,6 +1,7 @@
 
 #local variables
 locals {
+  baz = "aaa"
   topics = {
     nguyen-topic = {
       creator      = "nguyen-vo1"
@@ -62,6 +63,10 @@ resource "google_pubsub_topic" "terraform-to-gcp" {
     owner        = local.topics.nguyen-topic.owner
     appliocation = local.topics.nguyen-topic.appliocation
     name         = local.topics.nguyen-topic.name
+    # expression examples
+    name              = "string-interpolation-${local.baz}"
+    foo               = local.baz == "aaa" ? "short-hand" : "if-statement"
+    long_if_statement = "hello-%{if local.baz != ""}-${local.baz}-%{else}-unammed-%{endif}"
   }
   message_storage_policy {
     allowed_persistence_regions = ["europe-west3"]
@@ -104,4 +109,23 @@ resource "google_firestore_document" "mydoc" {
   document_id = var.firestore.docID
   fields      = jsonencode(var.firestore.fields)
   depends_on  = [google_project.test_project, google_project_service.services]
+}
+
+
+output "topic" {
+  value = [for k, v in local.topics.nguyen-topic : "${k}=${v}"]
+}
+output "loop-expression" {
+  value = <<-EOT
+      %{for i in range(0, 3)}
+        "${local.baz}-${i}"
+      %{endfor}
+    EOT
+}
+output "multi-line-string" {
+  value = <<-EOT
+      multi-line
+      string
+      interpolation
+    EOT
 }
