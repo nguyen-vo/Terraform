@@ -7,9 +7,9 @@ gcp_project = {
   region      = "europe-west3"
   zone        = "europe-west3-c"
 }
-firestore = {
+test-collection = {
   collection = "terraform-config"
-  docID      = "local"
+  docID      = "module"
   fields = {
     //JSON string format
     fieldname = {

@@ -1,0 +1,1 @@
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"firestore-doc","Source":"./modules/firestore","Dir":"modules/firestore"},{"Key":"pubsub-terraform-to-gcp","Source":"./modules/pubsub","Dir":"modules/pubsub"},{"Key":"pubsub-local-top-gcp","Source":"./modules/pubsub","Dir":"modules/pubsub"}]}

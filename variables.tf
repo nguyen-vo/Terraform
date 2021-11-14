@@ -11,8 +11,8 @@ variable "gcp_project" {
 
 }
 #create a firestore variable with default values
-variable "firestore" {
-  description = "firestore"
+variable "test-collection" {
+  description = "test collection"
   # the value will be assigned by terraform during execution
   # the value is defined in the gcp_var.json
 }

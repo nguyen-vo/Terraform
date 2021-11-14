@@ -14,6 +14,7 @@ locals {
 }
 
 terraform {
+  required_version = ">=1.0.0"
   required_providers {
     google = {
       source  = "hashicorp/google"
@@ -53,11 +54,11 @@ resource "google_project_service" "services" {
 
   disable_dependent_services = true
 }
-
-# create pubsub topic
-resource "google_pubsub_topic" "terraform-to-gcp" {
-  project = google_project.test_project.project_id
-  name    = local.topics.nguyen-topic.name
+module "pubsub-terraform-to-gcp" {
+  source                      = "./modules/pubsub"
+  project_id                  = google_project.test_project.project_id
+  topic_name                  = local.topics.nguyen-topic.name
+  allowed_persistence_regions = ["europe-west3"]
   labels = {
     creator      = local.topics.nguyen-topic.creator
     owner        = local.topics.nguyen-topic.owner
@@ -68,50 +69,32 @@ resource "google_pubsub_topic" "terraform-to-gcp" {
     foo               = local.baz == "aaa" ? "short-hand" : "if-statement"
     long_if_statement = "hello-%{if local.baz != ""}-${local.baz}-%{else}-unammed-%{endif}"
   }
-  message_storage_policy {
-    allowed_persistence_regions = ["europe-west3"]
-  }
-
 }
 
-# create pubsub subscription and attach to topic
-resource "google_pubsub_subscription" "terraform-to-gcp-sub" {
-  project                    = google_project.test_project.project_id
-  name                       = local.topics.nguyen-topic.name
-  topic                      = google_pubsub_topic.terraform-to-gcp.name
-  ack_deadline_seconds       = 600       #600s = 10m
-  message_retention_duration = "604800s" #604800s = 1 week
-  enable_message_ordering    = false
-  #   retry_policy {
-  #     minimum_backoff = "1s"
-  #     maximum_backoff = "10s"
-  #     maximum_doublings = 10
-  #     #dead_letter_policy {
-  #     #  dead_letter_topic = google_pubsub_topic.terraform-to-gcp.name
-  #     #}
-  #   }
-  labels = {
-    creator      = local.topics.nguyen-topic.creator
-    owner        = local.topics.nguyen-topic.owner
-    appliocation = local.topics.nguyen-topic.appliocation
-    name         = local.topics.nguyen-topic.subscription
-  }
+module "pubsub-local-top-gcp" {
+  source                      = "./modules/pubsub"
+  project_id                  = google_project.test_project.project_id
+  topic_name                  = "local-to-gcp"
+  allowed_persistence_regions = ["europe-west3"]
 }
+
 #enable firestore service
 resource "google_app_engine_application" "app" {
   project       = google_project.test_project.project_id
   location_id   = var.gcp_project.region
   database_type = "CLOUD_FIRESTORE"
 }
-#create a document
-resource "google_firestore_document" "mydoc" {
-  collection  = var.firestore.collection
-  document_id = var.firestore.docID
-  fields      = jsonencode(var.firestore.fields)
-  depends_on  = [google_project.test_project, google_project_service.services]
+
+module "firestore-doc" {
+  source     = "./modules/firestore"
+  project_id = google_project.test_project.project_id
+  region     = var.gcp_project.region
+  firestore  = var.test-collection
+  depends_on = [google_project.test_project, google_project_service.services]
 }
-
-
+output "created_document" {
+  value = module.firestore-doc.doc_created
+}
 output "topic" {
   value = [for k, v in local.topics.nguyen-topic : "${k}=${v}"]
 }
